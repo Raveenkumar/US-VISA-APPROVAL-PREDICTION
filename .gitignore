@@ -157,3 +157,5 @@ cython_debug/
 # vscode
 .vscode
 
+# ignore artifact folder
+artifact/*
