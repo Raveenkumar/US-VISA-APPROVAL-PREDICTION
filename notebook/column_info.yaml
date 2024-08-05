@@ -1,0 +1,15 @@
+columns:
+  case_id: object
+  case_status: object
+  continent: object
+  education_of_employee: object
+  full_time_position: object
+  has_job_experience: object
+  no_of_employees: int64
+  prevailing_wage: float64
+  region_of_employment: object
+  requires_job_training: object
+  unit_of_wage: object
+  yr_of_estab: int64
+
+  

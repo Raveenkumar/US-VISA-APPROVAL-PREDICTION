@@ -16,3 +16,8 @@ TRAINING_DATA_FILE_NAME: str = "training_data.csv"
 TEST_DATA_FILE_NAME: str = "test_data.csv"
 TRAIN_TEST_SPLIT_RATIO : float = 0.25
 
+# Data validation_constants
+DATADRIFT_FILE_NAME: str = "report.yaml"
+DATA_VALIDATION_DIR: str = "data_validation"
+
+

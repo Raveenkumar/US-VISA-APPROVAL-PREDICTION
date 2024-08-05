@@ -1,11 +1,15 @@
 from dataclasses import dataclass
+from tkinter import Y
+
+import yaml
 from us_visa.constants import  *
 import os
 from datetime import datetime
 
+
 from us_visa.pipeline import training_pipeline
 
-TIMESTAMP: str = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
+TIMESTAMP: str = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
 
 @dataclass
 class TrainingPipelineConfig:
@@ -24,6 +28,15 @@ class DataIngestionConfig:
     train_test_split_ratio = TRAIN_TEST_SPLIT_RATIO
     collection_name = COLLECTION_NAME
     db_name = DB_NAME
+    
+@dataclass
+class DataValidationConfig:
+        schema_file ="./config/schema.yaml"
+        data_drift_file_path = os.path.join(training_pipeline_config.artifact_dir,DATA_VALIDATION_DIR,DATADRIFT_FILE_NAME)
+        
+    
+    
+    
     
     
     
