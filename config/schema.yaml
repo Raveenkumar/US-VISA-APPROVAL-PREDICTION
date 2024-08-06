@@ -31,12 +31,16 @@ categorical_columns:
   - unit_of_wage
   - full_time_position
   - case_status
+  
+# for data transformation
+derivated_columns:
+  - company_age
 
 drop_columns:
   - case_id
   - yr_of_estab
 
-  # for data transformation
+  
 num_features:
   - no_of_employees
   - prevailing_wage
@@ -56,5 +60,8 @@ oh_columns:
 transform_columns:
   - no_of_employees
   - company_age
+
+target_column:
+  - case_status
 
 

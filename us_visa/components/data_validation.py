@@ -151,17 +151,6 @@ class DataValidation:
             if not test_status:
                 validation_error_message = f"validate number of testing columns failed on path:{test_data_path}"    
                 
-            # validate the column names
-            training_status = self.validate_column_names(train_df_columns)
-            test_status = self.validate_column_names(test_df_columns)
-            
-            if not training_status:
-                validation_error_message = f"validate training columns names failed on path:{training_data_path}"
-                
-            if not test_status:
-                validation_error_message = f"validate testing column names failed on path:{test_data_path}"
-                
-                
            # validate the no of columns
             training_status = self.validate_column_names(train_df_columns)
             test_status = self.validate_column_names(test_df_columns)

@@ -22,9 +22,9 @@ training_pipeline_config: TrainingPipelineConfig = TrainingPipelineConfig()
     
 @dataclass
 class DataIngestionConfig:
-    rawdata_file_path = os.path.join(training_pipeline_config.artifact_dir,RAW_DATA_DIR,RAW_DATA_FILE_NAME)
-    trainingdata_file_path = os.path.join(training_pipeline_config.artifact_dir,TRAINING_DATA_DIR,TRAINING_DATA_FILE_NAME)
-    testdata_file_path = os.path.join(training_pipeline_config.artifact_dir,TESTING_DATA_DIR,TEST_DATA_FILE_NAME)
+    rawdata_file_path = os.path.join(training_pipeline_config.artifact_dir,INGESTION_DATA_DIR,RAW_DATA_DIR,RAW_DATA_FILE_NAME)
+    trainingdata_file_path = os.path.join(training_pipeline_config.artifact_dir,INGESTION_DATA_DIR,TRAINING_DATA_DIR,TRAINING_DATA_FILE_NAME)
+    testdata_file_path = os.path.join(training_pipeline_config.artifact_dir,INGESTION_DATA_DIR,TESTING_DATA_DIR,TEST_DATA_FILE_NAME)
     train_test_split_ratio = TRAIN_TEST_SPLIT_RATIO
     collection_name = COLLECTION_NAME
     db_name = DB_NAME
@@ -34,7 +34,16 @@ class DataValidationConfig:
         schema_file ="./config/schema.yaml"
         data_drift_file_path = os.path.join(training_pipeline_config.artifact_dir,DATA_VALIDATION_DIR,DATADRIFT_FILE_NAME)
         
-    
+
+@dataclass
+class DataTransformationConfig:
+        schema_file ="./config/schema.yaml"
+        data_transformatin_data_path = os.path.join(training_pipeline_config.artifact_dir,DATA_TRANSFORMATION_DIR,DATA_TRANSFORMATION_DATA_DIR)
+        data_transformatin_training_data_path = os.path.join(data_transformatin_data_path,TRAINING_DATA_FILE_NAME.replace("csv","npy"))
+        data_transformatin_test_data_path = os.path.join(data_transformatin_data_path,TEST_DATA_FILE_NAME.replace("csv","npy"))
+        data_preprocessing_object_file_path = os.path.join(training_pipeline_config.artifact_dir,DATA_TRANSFORMATION_DIR,DATA_TRANSFORMATION_OJBECT_DIR,DATA_TRANSFORMATION_PREPROCESSER_FILE_NAME)
+        
+        
     
     
     
