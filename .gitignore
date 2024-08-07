@@ -159,3 +159,4 @@ cython_debug/
 
 # ignore artifact folder
 artifact/*
+notebook/catboost_info/*
