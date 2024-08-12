@@ -30,7 +30,13 @@ DATA_TRANSFORMATION_DATA_DIR: str = 'transformed_data'
 DATA_TRANSFORMATION_OJBECT_DIR: str ='transformed_object'
 DATA_TRANSFORMATION_PREPROCESSER_FILE_NAME:str = 'preprocesser.dill'
 
+# model training constants
+TRAINED_MODEL_FILE_NAME:str ='model.dill'
+TRAINED_MODEL_DIR:str ='trained_models'
+MODEL_EXCEPTED_ACCURACY = 0.6
 
 
-
-
+# AWS credentials
+AWS_ACCESS_KEY_ID_ENV_KEY = 'AWS_ACCESS_KEY_ID_ENV_KEY'
+AWS_SECRET_ACCESS_KEY_ENV_KEY = 'AWS_SECRET_ACCESS_KEY_ENV_KEY'
+REGION_NAME = 'us-east-2'
