@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import dataclasses
 from tkinter import Y
 
 import yaml
@@ -43,8 +44,13 @@ class DataTransformationConfig:
         data_transformatin_test_data_path = os.path.join(data_transformatin_data_path,TEST_DATA_FILE_NAME.replace("csv","npy"))
         data_preprocessing_object_file_path = os.path.join(training_pipeline_config.artifact_dir,DATA_TRANSFORMATION_DIR,DATA_TRANSFORMATION_OJBECT_DIR,DATA_TRANSFORMATION_PREPROCESSER_FILE_NAME)
         
+@dataclass
+class ModelTrainerConfig:
+        trained_model_file_path = os.path.join(training_pipeline_config.artifact_dir,TRAINED_MODEL_DIR,TRAINED_MODEL_FILE_NAME)
+        model_excepted_accuracy = MODEL_EXCEPTED_ACCURACY
+        model_config_file_path =  os.path.join("config", "model.yaml")
+         
         
-    
     
     
     
