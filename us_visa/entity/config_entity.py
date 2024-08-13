@@ -8,8 +8,6 @@ import os
 from datetime import datetime
 
 
-from us_visa.pipeline import training_pipeline
-
 TIMESTAMP: str = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
 
 @dataclass
@@ -20,6 +18,12 @@ class TrainingPipelineConfig:
 
 
 training_pipeline_config: TrainingPipelineConfig = TrainingPipelineConfig()   
+    
+@dataclass
+class DataAccessConfig:
+        collection_name = COLLECTION_NAME
+        db_name = DB_NAME
+            
     
 @dataclass
 class DataIngestionConfig:

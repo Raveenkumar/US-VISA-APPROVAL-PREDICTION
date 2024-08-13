@@ -2,16 +2,16 @@ from us_visa.exception import USvisaException
 from us_visa.logger import logging
 import sys
 from us_visa.configuration.mongodb_config import MongoDBConnection
-from us_visa.entity.config_entity import DataIngestionConfig
+from us_visa.entity.config_entity import DataAccessConfig
 import pandas as pd
 import numpy as np
  
 
 class DataAccess:
-    def __init__(self) -> None:
+    def __init__(self,data_access_config:DataAccessConfig) -> None:
         try:
-            self.db_name = DataIngestionConfig().db_name
-            self.collection_name = DataIngestionConfig().collection_name
+            self.db_name = data_access_config.db_name
+            self.collection_name = data_access_config.collection_name
             self.mongodb_connection= MongoDBConnection()
             self.mongodb_client = self.mongodb_connection.client
         except Exception as e:
