@@ -4,9 +4,11 @@ from datetime import datetime
 DB_NAME: str = "us_visa"
 COLLECTION_NAME: str = "US_VISA"
 MONGO_DB_URL: str = "MONGODB_URL"
-# MONGO_DB_URL: str = "mongodb+srv://jraveen1997:raveenkumar@cluster0.q7ktbxf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
+<<<<<<< HEAD
 # MONGODB_URL="mongodb+srv://jraveen1997:raveenkumar@cluster0.q7ktbxf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+=======
+>>>>>>> 247b37a (changes in constants)
 
 # Data Ingestion costants
 RAW_DATA_DIR: str = "raw_data"
