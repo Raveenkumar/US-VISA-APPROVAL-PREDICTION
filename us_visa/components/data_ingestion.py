@@ -2,7 +2,7 @@ from us_visa.logger import logging
 from us_visa.exception import USvisaException
 import sys
 import os
-from us_visa.data_access.data_access import DataAccess
+from pandas import DataFrame
 from us_visa.entity.config_entity import DataIngestionConfig
 # from us_visa.constants import RAW_DATA_FILE_NAME,TRAINING_DATA_FILE_NAME,TEST_DATA_FILE_NAME,TRAIN_TEST_SPLIT_RATIO
 from sklearn.model_selection import train_test_split
@@ -10,13 +10,12 @@ from us_visa.entity.artifact_entity import DataIngestionArtifact
 
 
 class DataIngestion:
-    def __init__(self):
-        self.data_access = DataAccess()
-        self.raw_data = self.data_access.read_data_from_db()
-        self.raw_data_file_path = DataIngestionConfig().rawdata_file_path
-        self.training_data_file_path = DataIngestionConfig().trainingdata_file_path
-        self.test_data_file_path = DataIngestionConfig().testdata_file_path
-        self.train_test_split_ratio = DataIngestionConfig().train_test_split_ratio
+    def __init__(self,data_ingestion_config:DataIngestionConfig, raw_data:DataFrame ):
+        self.raw_data = raw_data
+        self.raw_data_file_path = data_ingestion_config.rawdata_file_path
+        self.training_data_file_path = data_ingestion_config.trainingdata_file_path
+        self.test_data_file_path = data_ingestion_config.testdata_file_path
+        self.train_test_split_ratio = data_ingestion_config.train_test_split_ratio
     
     def store_raw_data(self):
         """

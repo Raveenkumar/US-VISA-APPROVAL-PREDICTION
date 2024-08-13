@@ -2,13 +2,17 @@ from us_visa.data_access import data_access
 from us_visa.exception import USvisaException
 from us_visa.logger import logging
 import sys
-from us_visa.entity.config_entity import DataAccessConfig
+from us_visa.entity.config_entity import (DataAccessConfig,
+                                          DataIngestionConfig)
 from us_visa.data_access.data_access import DataAccess
+from us_visa.components.data_ingestion import DataIngestion
+
 
 
 class TrainingPipeline:
     def __init__(self):
         self.data_access_config = DataAccessConfig()
+        self.data_ingestion_config = DataIngestionConfig()
     
     
     def initiate_training(self):
@@ -29,11 +33,10 @@ class TrainingPipeline:
             
             # data ingestion process
             logging.info('start the data ingestion process')
-                
-        
+            data_ingestion = DataIngestion(self.data_ingestion_config,raw_data=raw_data)
+            data_ingestion.initiate_data_ingestion()
+            logging.info('start the data ingestion completed!.')
             
             
-            
-        
         except Exception as e:
            raise USvisaException(error_message=e,error_detail=sys)
