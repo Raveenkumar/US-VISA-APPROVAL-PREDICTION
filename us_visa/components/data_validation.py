@@ -11,12 +11,12 @@ from us_visa.utils.main_utils import read_yaml_file,write_yaml_file,read_data,ge
 from pandas import DataFrame
 
 class DataValidation:
-    def __init__(self,data_ingestion_artifact:DataIngestionArtifact) -> None:
+    def __init__(self,data_validation_config:DataValidationConfig, data_ingestion_artifact:DataIngestionArtifact) -> None:
         try:
             self.data_ingestion_artifact = data_ingestion_artifact
-            self.schema_yaml = read_yaml_file(DataValidationConfig().schema_file)
+            self.schema_yaml = read_yaml_file(data_validation_config.schema_file)
             self.columns = [list(column_data.keys())[0] for column_data in  self.schema_yaml['columns']]
-            self.data_drift_filepath = DataValidationConfig().data_drift_file_path
+            self.data_drift_filepath = data_validation_config.data_drift_file_path
         except Exception as e:
             raise USvisaException(e,sys)    
             
