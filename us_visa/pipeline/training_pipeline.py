@@ -5,11 +5,13 @@ import sys
 from us_visa.entity.config_entity import (DataAccessConfig,
                                           DataIngestionConfig,
                                           DataValidationConfig,
-                                          DataTransformationConfig)
+                                          DataTransformationConfig,
+                                          ModelTrainerConfig)
 from us_visa.data_access.data_access import DataAccess
 from us_visa.components.data_ingestion import DataIngestion
 from us_visa.components.data_validation import DataValidation
 from us_visa.components.data_transformation import DataTranformation
+from us_visa.components.model_trainer import ModelTrainer
 
 
 
@@ -19,6 +21,7 @@ class TrainingPipeline:
         self.data_ingestion_config = DataIngestionConfig()
         self.data_validation_config  = DataValidationConfig()
         self.data_transformation_config = DataTransformationConfig()
+        self.model_trainer_config = ModelTrainerConfig()
     
     
     def initiate_training(self):
@@ -59,7 +62,13 @@ class TrainingPipeline:
             
             logging.info("data transformation process completed!.")
             
+            # data Model trainer process
+            logging.info("start model trainer process")
+            model_trainer = ModelTrainer(model_trainer_config=self.model_trainer_config,
+                                         data_transformation_artifact=data_transformation_artifact)
+            model_trainer_artifact = model_trainer.initiate_model_training()
             
+            logging.info("data Model training process completed!.")
             
         except Exception as e:
            raise USvisaException(error_message=e,error_detail=sys)

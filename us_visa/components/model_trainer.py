@@ -13,9 +13,9 @@ from us_visa.utils.main_utils import load_numpy_array,save_obj
 
 
 class ModelTrainer:
-    def __init__(self,data_transformation_artifact:DataTranformationArtifact) -> None:
+    def __init__(self,model_trainer_config:ModelTrainerConfig,data_transformation_artifact:DataTranformationArtifact) -> None:
         self.data_transformation_artifact = data_transformation_artifact
-        self.model_trainer_config = ModelTrainerConfig()
+        self.model_trainer_config = model_trainer_config
     
     def get_model_trainier_object(self,train:np.ndarray,test:np.ndarray):
         """
@@ -51,8 +51,7 @@ class ModelTrainer:
                 # store the score
                 metric_artifact = ClassificationMatrixArtifacts(f1_score=f1, recall_score=recall, precision_score=precision) # type:ignore
                 
-                
-                logging.info(msg=f"model trainied successfully metrics : {metric_artifact}") 
+                logging.info(msg=f"model trainied successfully model : {best_model_obj}, metrics : {metric_artifact}") 
                 
                 return best_model_obj, metric_artifact
             
@@ -82,12 +81,12 @@ class ModelTrainer:
             # provide this data to model_training_object
             best_model_obj, metric_artifact= self.get_model_trainier_object(train=train_data,test=test_data)
             
-            # # store model,metric in model trainier artifacts
-            model_trainier_artifact = ModelTrainerArtifact(model_path=best_model_obj, metrics_path=metric_artifact)
-            
-            logging.info(msg=f"initializing model training process completed successfully  model_detials {model_trainier_artifact}")
-            
             save_obj(file_path=self.model_trainer_config.trained_model_file_path,obj=best_model_obj)
+            # # store model,metric in model trainier artifacts
+            model_trainier_artifact = ModelTrainerArtifact(model_path=self.model_trainer_config.trained_model_file_path, metrics_path=metric_artifact)
+            
+            logging.info(msg=f" model_detials:{model_trainier_artifact}")
+            
             
             return model_trainier_artifact
         
