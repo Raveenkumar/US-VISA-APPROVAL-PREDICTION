@@ -15,6 +15,7 @@ class DataValidationArtifact:
 @dataclass
 class DataTranformationArtifact:
       preprocessor_object_path: str
+      target_encoded_object_path: str
       training_data_path: str
       testing_data_path: str
          

@@ -47,6 +47,7 @@ class DataTransformationConfig:
         data_transformatin_training_data_path = os.path.join(data_transformatin_data_path,TRAINING_DATA_FILE_NAME.replace("csv","npy"))
         data_transformatin_test_data_path = os.path.join(data_transformatin_data_path,TEST_DATA_FILE_NAME.replace("csv","npy"))
         data_preprocessing_object_file_path = os.path.join(training_pipeline_config.artifact_dir,DATA_TRANSFORMATION_DIR,DATA_TRANSFORMATION_OJBECT_DIR,DATA_TRANSFORMATION_PREPROCESSER_FILE_NAME)
+        target_encoder_object_file_path = os.path.join(training_pipeline_config.artifact_dir,DATA_TRANSFORMATION_DIR,DATA_TRANSFORMATION_OJBECT_DIR,TARGET_ENCODER_FILE_NAME)
         
 @dataclass
 class ModelTrainerConfig:

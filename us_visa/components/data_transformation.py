@@ -17,13 +17,14 @@ import numpy as np
 
 
 class DataTranformation:
-    def __init__(self,data_ingestion_artifact:DataIngestionArtifact,data_validation_artifact:DataValidationArtifact):
+    def __init__(self,data_transformation_config:DataTransformationConfig,data_ingestion_artifact:DataIngestionArtifact,data_validation_artifact:DataValidationArtifact):
         # This block of code is part of the constructor (`__init__` method) of the `DataTranformation`
         # class. Here's what it does:
         try:
+            self.data_transformation_config = data_transformation_config
             self.data_ingestion_artifact = data_ingestion_artifact
             self.data_validation_artifact = data_validation_artifact
-            self.schema_yaml = read_yaml_file((DataTransformationConfig().schema_file))
+            self.schema_yaml = read_yaml_file((data_transformation_config.schema_file))
             
             
             
@@ -68,6 +69,7 @@ class DataTranformation:
             target_encoder = OrdinalEncoder(categories=[['Certified', 'Denied']])
             encoded_y = target_encoder.fit_transform(y)
             logging.info(f'target feature :{self.schema_yaml['target_column'][0]} encoded  successfully')
+            save_obj(self.data_transformation_config.target_encoder_object_file_path,encoded_y)
             return encoded_y
             
         except Exception as e:
@@ -178,17 +180,18 @@ class DataTranformation:
             final_test_data ,_ = self.data_transformation(df=test_df)
             
             # store the numpy training data,  numpy testing data
-            save_numpy_array(file_path=DataTransformationConfig().data_transformatin_training_data_path,content=final_train_data)
-            save_numpy_array(file_path=DataTransformationConfig().data_transformatin_test_data_path,content=final_test_data)
+            save_numpy_array(file_path=self.data_transformation_config.data_transformatin_training_data_path,content=final_train_data)
+            save_numpy_array(file_path=self.data_transformation_config.data_transformatin_test_data_path,content=final_test_data)
     
             # store the preprocesser object 
-            save_obj(file_path=DataTransformationConfig().data_preprocessing_object_file_path,obj=preprocesser_object)
+            save_obj(file_path=self.data_transformation_config.data_preprocessing_object_file_path,obj=preprocesser_object)
             
-            data_tranformation_artifact = DataTranformationArtifact( preprocessor_object_path=DataTransformationConfig().data_preprocessing_object_file_path,
-                                                                    training_data_path=DataTransformationConfig().data_transformatin_training_data_path,
-                                                                    testing_data_path=DataTransformationConfig().data_transformatin_test_data_path)
+            data_tranformation_artifact = DataTranformationArtifact(preprocessor_object_path=self.data_transformation_config.data_preprocessing_object_file_path,
+                                                                    target_encoded_object_path=self.data_transformation_config.target_encoder_object_file_path,
+                                                                    training_data_path=self.data_transformation_config.data_transformatin_training_data_path,
+                                                                    testing_data_path=self.data_transformation_config.data_transformatin_test_data_path)
             
-            logging.info(f'data tranformation completed suceessfully , data_transformation artifact object : {data_tranformation_artifact}')
+            logging.info(f'data_transformation artifact object : {data_tranformation_artifact}')
             return data_tranformation_artifact
         
         except Exception as e:

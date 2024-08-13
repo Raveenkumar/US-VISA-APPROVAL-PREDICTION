@@ -40,7 +40,7 @@ class TrainingPipeline:
             logging.info('start the data ingestion process')
             data_ingestion = DataIngestion(self.data_ingestion_config,raw_data=raw_data)
             data_ingestion_artifact = data_ingestion.initiate_data_ingestion()
-            logging.info('start the data ingestion completed!.')
+            logging.info('data ingestion completed!.')
             
             # data validation process
             logging.info('started Data validation process')
@@ -48,13 +48,16 @@ class TrainingPipeline:
                                              data_ingestion_artifact=data_ingestion_artifact)
             
             data_validation_artifact = data_validation.initiate_data_validation()
-            logging.info('started Data validation completed')
-            
-            
-            
+            logging.info('Data validation completed!.')
+                       
             # data transformation process
-            # logging.info("start the data transformation process")
-            # data_transformation  = DataTranformation(self.data_transformation_config,)
+            logging.info("start the data transformation process")
+            data_transformation  = DataTranformation(self.data_transformation_config,
+                                                    data_ingestion_artifact=data_ingestion_artifact,
+                                                    data_validation_artifact=data_validation_artifact)
+            data_transformation_artifact = data_transformation.initiate_data_transformation()
+            
+            logging.info("data transformation process completed!.")
             
             
             

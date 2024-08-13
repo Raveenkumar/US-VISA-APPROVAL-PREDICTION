@@ -27,6 +27,7 @@ DATA_TRANSFORMATION_DIR:str = 'data_transformation'
 DATA_TRANSFORMATION_DATA_DIR: str = 'transformed_data'
 DATA_TRANSFORMATION_OJBECT_DIR: str ='transformed_object'
 DATA_TRANSFORMATION_PREPROCESSER_FILE_NAME:str = 'preprocesser.dill'
+TARGET_ENCODER_FILE_NAME:str = 'target_encoder.dill'
 
 # model training constants
 TRAINED_MODEL_FILE_NAME:str ='model.dill'
