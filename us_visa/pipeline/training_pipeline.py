@@ -6,12 +6,17 @@ from us_visa.entity.config_entity import (DataAccessConfig,
                                           DataIngestionConfig,
                                           DataValidationConfig,
                                           DataTransformationConfig,
-                                          ModelTrainerConfig)
+                                          ModelTrainerConfig,
+                                          ModelEvalutionConfig,
+                                          ModelPusherConfig)
 from us_visa.data_access.data_access import DataAccess
 from us_visa.components.data_ingestion import DataIngestion
 from us_visa.components.data_validation import DataValidation
 from us_visa.components.data_transformation import DataTranformation
 from us_visa.components.model_trainer import ModelTrainer
+from us_visa.components.model_evaluation import ModelEvalution
+from us_visa.components.model_pusher import ModelPusher
+
 
 
 
@@ -22,7 +27,8 @@ class TrainingPipeline:
         self.data_validation_config  = DataValidationConfig()
         self.data_transformation_config = DataTransformationConfig()
         self.model_trainer_config = ModelTrainerConfig()
-    
+        self.model_evalution_config = ModelEvalutionConfig()
+        self.model_pusher_config = ModelPusherConfig()    
     
     def initiate_training(self):
         """
@@ -69,6 +75,24 @@ class TrainingPipeline:
             model_trainer_artifact = model_trainer.initiate_model_training()
             
             logging.info("data Model training process completed!.")
+            
+            # model evalution process
+            logging.info("start model evalution process")
+            model_evalution = ModelEvalution(model_evalution_config=self.model_evalution_config,
+                                             data_ingestion_artifact=data_ingestion_artifact,
+                                             data_tranformation_artifact=data_transformation_artifact,
+                                             model_training_artifact=model_trainer_artifact)
+            
+            model_evalution_artifact = model_evalution.initiate_model_evalution_process()
+            logging.info("data Model evalution process completed!.")
+            
+            # model pusher process
+            logging.info("start model pusher process")
+            model_pusher = ModelPusher(model_pusher_config=self.model_pusher_config,
+                                       model_evalution_artifact=model_evalution_artifact)
+            
+            model_pusher.initiate_modelpusher_process()
+            logging.info("data Model pusher process completed!.")
             
         except Exception as e:
            raise USvisaException(error_message=e,error_detail=sys)
