@@ -61,6 +61,13 @@ class ModelEvalutionConfig:
         s3_bucket_name = S3_BUCKET_NAME
         s3_model_path = S3_MODELL_OBJECT_NAME
         schema_file ="./config/schema.yaml"
+        
+        
+@dataclass
+class ModelPusherConfig:
+        expected_accuracy_change = EXCEPTED_ACCURACY_CHANGE
+        s3_bucket_name = S3_BUCKET_NAME
+        s3_model_path = S3_MODELL_OBJECT_NAME        
 
     
     

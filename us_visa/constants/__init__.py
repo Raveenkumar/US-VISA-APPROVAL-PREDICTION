@@ -32,14 +32,17 @@ TARGET_ENCODER_FILE_NAME:str = 'target_encoder.dill'
 # model training constants
 TRAINED_MODEL_FILE_NAME:str ='model.dill'
 TRAINED_MODEL_DIR:str ='trained_models'
-MODEL_EXCEPTED_ACCURACY = 0.6
+MODEL_EXCEPTED_ACCURACY:float= 0.6
 
 
 # AWS credentials
-AWS_ACCESS_KEY_ID_ENV_KEY = 'AWS_ACCESS_KEY_ID_ENV_KEY'
-AWS_SECRET_ACCESS_KEY_ENV_KEY = 'AWS_SECRET_ACCESS_KEY_ENV_KEY'
-REGION_NAME = 'us-east-2'
+AWS_ACCESS_KEY_ID_ENV_KEY:str = 'AWS_ACCESS_KEY_ID_ENV_KEY'
+AWS_SECRET_ACCESS_KEY_ENV_KEY:str = 'AWS_SECRET_ACCESS_KEY_ENV_KEY'
+REGION_NAME:str = 'us-east-2'
 
 # Model Evalution constants
-S3_BUCKET_NAME = 'usvisamodels'
-S3_MODELL_OBJECT_NAME = 'model.dill'
+S3_BUCKET_NAME:str = 'usvisamodels'
+S3_MODELL_OBJECT_NAME:str = 'model.dill'
+
+# Model pusher constants
+EXCEPTED_ACCURACY_CHANGE:float = 0.15

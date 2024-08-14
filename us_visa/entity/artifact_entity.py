@@ -34,6 +34,6 @@ class ModelTrainerArtifact:
     
 @dataclass
 class ModelEvalutionArtifact:
-    change_in_score: ndarray
+    change_in_score: float
     trained_model_path: str
     existing_best_model_path:str          
