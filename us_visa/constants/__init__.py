@@ -42,7 +42,9 @@ REGION_NAME:str = 'us-east-2'
 
 # Model Evalution constants
 S3_BUCKET_NAME:str = 'usvisamodels'
-S3_MODELL_OBJECT_NAME:str = 'model.dill'
+S3_MODEL_OBJECT_NAME:str = 'model.dill'
+S3_PREPROCESSER_OBJECT_NAME:str = 'preprocesser.dill'
+S3_TARGETENCODER_OBJECT_NAME:str = 'target_encoder.dill'
 
 # Model pusher constants
 EXCEPTED_ACCURACY_CHANGE:float = 0.15

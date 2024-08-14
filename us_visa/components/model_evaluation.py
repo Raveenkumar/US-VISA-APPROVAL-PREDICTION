@@ -16,6 +16,8 @@ class EvalutionResponse:
     change_in_score: ndarray
     trained_model_path:str
     existing_best_model_path: str
+    preprocesser_obj_path: str
+    target_encoder_obj_path: str
 
 
 class ModelEvalution:
@@ -27,8 +29,7 @@ class ModelEvalution:
         self.data_ingestion_artifact = data_ingestion_artifact
         self.data_tranformation_artifact = data_tranformation_artifact
         self.model_training_artifact = model_training_artifact
-        self.s3 = S3Estimator(bucket_name=self.model_evalution_config.s3_bucket_name,
-                              model_path=self.model_evalution_config.s3_model_path)
+        self.s3 = S3Estimator(bucket_name=self.model_evalution_config.s3_bucket_name)
     
     def get_best_model(self) -> object | None:
         """
@@ -37,7 +38,7 @@ class ModelEvalution:
         :failure: Raise Exception
         """
         try:
-            best_model = self.s3.load_model()
+            best_model = self.s3.load_model(self.model_evalution_config.s3_model_path)
             if best_model:logging.info(f'getting the best model from s3 :{best_model} getted successfully.')    
             else:logging.warning(msg=f'No model present in s3 bucket')   
             return best_model
@@ -60,7 +61,7 @@ class ModelEvalution:
             encoded_target_variable = target_encoder_object.transform(y) # type: ignore
 
             # load best model
-            best_model = self.s3.load_model()
+            best_model = self.get_best_model()
             best_model_f1_score = 0
             if best_model:
                 y_pred= best_model.predict(preprocessed_data) # type: ignore
@@ -103,7 +104,9 @@ class ModelEvalution:
             
             result = EvalutionResponse(change_in_score=change_in_score, # type: ignore
                                        trained_model_path=self.model_training_artifact.model_path,
-                                       existing_best_model_path=self.model_evalution_config.s3_model_path)
+                                       existing_best_model_path=self.model_evalution_config.s3_model_path,
+                                       preprocesser_obj_path=self.data_tranformation_artifact.preprocessor_object_path,
+                                       target_encoder_obj_path=self.data_tranformation_artifact.target_encoded_object_path)
             
             logging.info(msg=f'Model evalution responce {result}')
             return result       
@@ -121,7 +124,9 @@ class ModelEvalution:
             evalution_responce = self.model_evalution_process()
             model_evalution_artifact = ModelEvalutionArtifact(change_in_score=evalution_responce.change_in_score, 
                                                               trained_model_path=evalution_responce.trained_model_path,
-                                                              existing_best_model_path=evalution_responce.existing_best_model_path)
+                                                              existing_best_model_path=evalution_responce.existing_best_model_path,
+                                                              preprocesser_obj_path=evalution_responce.preprocesser_obj_path,
+                                                              target_encoder_obj_path=evalution_responce.target_encoder_obj_path)
 
             logging.info(f"Model Evalution Artifact : {model_evalution_artifact}")
             return model_evalution_artifact

@@ -1,4 +1,3 @@
-from us_visa.data_access import data_access
 from us_visa.exception import USvisaException
 from us_visa.logger import logging
 import sys
@@ -37,7 +36,7 @@ class TrainingPipeline:
         :failure: Raise Exception
         """    
         try:
-            logging.info("Training Pipeline started is started")
+            logging.info("Training Pipeline  is started")
             
             # data access process
             logging.info("start the data access process")
@@ -94,5 +93,6 @@ class TrainingPipeline:
             model_pusher.initiate_modelpusher_process()
             logging.info("data Model pusher process completed!.")
             
+            logging.info("Training Pipeline is completed!.")
         except Exception as e:
            raise USvisaException(error_message=e,error_detail=sys)
