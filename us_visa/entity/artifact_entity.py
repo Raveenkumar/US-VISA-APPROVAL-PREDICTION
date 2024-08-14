@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from numpy import ndarray
 
 
 @dataclass
@@ -29,4 +30,10 @@ class ClassificationMatrixArtifacts:
 @dataclass
 class ModelTrainerArtifact:
     model_path: str
-    metrics_path: ClassificationMatrixArtifacts               
+    metrics_path: ClassificationMatrixArtifacts         
+    
+@dataclass
+class ModelEvalutionArtifact:
+    change_in_score: ndarray
+    trained_model_path: str
+    existing_best_model_path:str          

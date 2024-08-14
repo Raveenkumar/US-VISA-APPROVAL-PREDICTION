@@ -45,7 +45,7 @@ class SimpleStorageService:
         """ 
         try:
             bucket = self.get_bucket(bucket_name)
-            file_objects = [file_object for file_object in bucket.objects.filter(prefix=s3_key)]
+            file_objects = [file_object for file_object in bucket.objects.filter(Prefix=s3_key)]
             if len(file_objects) > 0:
                 logging.info(f"file path existed : {bucket_name}/{s3_key}")
                 return True

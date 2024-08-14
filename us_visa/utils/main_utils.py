@@ -139,9 +139,9 @@ def load_obj(file_path:str)-> object:
     """
     try:
         
-        if os.path.exists(path=file_path):
+        if os.path.exists(file_path):
             with open(file_path,mode='rb') as file_obj:
-                result = dill.load(file=file_path)
+                result = dill.load(file=file_obj)
             return result     
         else:
             e = Exception(f'object file path not exist path: {file_path}')    

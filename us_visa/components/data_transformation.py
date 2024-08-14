@@ -69,7 +69,7 @@ class DataTranformation:
             target_encoder = OrdinalEncoder(categories=[['Certified', 'Denied']])
             encoded_y = target_encoder.fit_transform(y)
             logging.info(f'target feature :{self.schema_yaml['target_column'][0]} encoded  successfully')
-            save_obj(self.data_transformation_config.target_encoder_object_file_path,encoded_y)
+            save_obj(self.data_transformation_config.target_encoder_object_file_path,target_encoder)
             return encoded_y
             
         except Exception as e:

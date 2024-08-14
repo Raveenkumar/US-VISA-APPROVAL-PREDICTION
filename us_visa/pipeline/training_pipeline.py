@@ -35,13 +35,13 @@ class TrainingPipeline:
             
             # data access process
             logging.info("start the data access process")
-            data_access = DataAccess(self.data_access_config)
+            data_access = DataAccess(data_access_config=self.data_access_config)
             raw_data = data_access.read_data_from_db()
             logging.info('data access process completed!.')
             
             # data ingestion process
             logging.info('start the data ingestion process')
-            data_ingestion = DataIngestion(self.data_ingestion_config,raw_data=raw_data)
+            data_ingestion = DataIngestion(data_ingestion_config=self.data_ingestion_config,raw_data=raw_data)
             data_ingestion_artifact = data_ingestion.initiate_data_ingestion()
             logging.info('data ingestion completed!.')
             
@@ -55,7 +55,7 @@ class TrainingPipeline:
                        
             # data transformation process
             logging.info("start the data transformation process")
-            data_transformation  = DataTranformation(self.data_transformation_config,
+            data_transformation  = DataTranformation(data_transformation_config=self.data_transformation_config,
                                                     data_ingestion_artifact=data_ingestion_artifact,
                                                     data_validation_artifact=data_validation_artifact)
             data_transformation_artifact = data_transformation.initiate_data_transformation()
