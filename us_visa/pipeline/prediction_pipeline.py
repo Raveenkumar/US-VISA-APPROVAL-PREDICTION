@@ -28,10 +28,10 @@ class PredictionPipeline:
                 education_of_employee=education_of_employee,
                 has_job_experience=has_job_experience,
                 requires_job_training=requires_job_training,
-                no_of_employees=no_of_employees,
-                yr_of_estab=yr_of_estab,
+                no_of_employees=int(no_of_employees),
+                yr_of_estab=int(yr_of_estab),
                 region_of_employment=region_of_employment,
-                prevailing_wage=prevailing_wage,
+                prevailing_wage=float(prevailing_wage),
                 unit_of_wage=unit_of_wage,
                 full_time_position=full_time_position).initiate_get_data_process()
             logging.info(msg='getting prediction data successfully!.')

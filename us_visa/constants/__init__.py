@@ -48,3 +48,8 @@ S3_TARGETENCODER_OBJECT_NAME:str = 'target_encoder.dill'
 
 # Model pusher constants
 EXCEPTED_ACCURACY_CHANGE:float = 0.15
+
+
+#api_constants
+APP_HOST = "0.0.0.0"
+APP_PORT = 8080
