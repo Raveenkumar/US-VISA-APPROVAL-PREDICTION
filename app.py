@@ -57,7 +57,8 @@ class DataForm:
 @app.get("/",tags=['input'])
 async def index(request: Request):
         return templates.TemplateResponse(
-            "usvisa.html",{"request": request, "context": " "})   
+            "usvisa.html",{"request": request, "context": " "})     
+        
 
           
 
