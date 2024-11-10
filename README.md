@@ -102,6 +102,4 @@ We welcome contributions from the community. Please fork this repository, make y
 4. Push to the branch (`git push origin feature/AmazingFeature`).
 5. Open a pull request.
 
-## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
